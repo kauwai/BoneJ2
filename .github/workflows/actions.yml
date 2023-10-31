@@ -1,0 +1,24 @@
+name: BELA-SCIP Integration
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Create SCIP Java index
+      run: docker run -v $(pwd):/sources --env JVM_VERSION=17 sourcegraph/scip-java:latest scip-java index
+
+    - name: Make HTTP Request with curl
+      env:
+        SCIP_SECRET: ${{ secrets.SCIP_SECRET }}
+      run: |
+        curl -X POST "https://bela-api.jux.house/api/architecture-scip?source=bone-j2&secret=${SCIP_SECRET}" \
+             -H "Content-Type: application/octet-stream" \
+             --data-binary @index.scip
