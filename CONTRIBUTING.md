@@ -12,7 +12,7 @@
 1) Create a [fork](https://imagej.github.io/develop/improving-the-code)
 2) [Synchronize](https://help.github.com/articles/syncing-a-fork/) your fork
 3) Create a topic branch for your fix / new feature, e.g. `fix-issue-#1`
-
+ 
 ## Commits
 * Write [descriptive](https://chris.beams.io/posts/git-commit/) commit messages
 * Ideally each commit in the history should build
